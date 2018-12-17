@@ -204,6 +204,10 @@
      */
     function _characterFromEvent(e) {
 
+        if(e.type == 'wheel') {
+            return e.type;
+        }
+
         // for keypress events we should return the character as is
         if (e.type == 'keypress') {
             var character = String.fromCharCode(e.which);
@@ -235,10 +239,6 @@
 
         if (_KEYCODE_MAP[e.which]) {
             return _KEYCODE_MAP[e.which];
-        }
-
-        if(e.type == 'wheel') {
-            return e.type;
         }
 
         // if it is not in the special map
