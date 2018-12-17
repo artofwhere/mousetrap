@@ -237,6 +237,10 @@
             return _KEYCODE_MAP[e.which];
         }
 
+        if(e.type == 'wheel') {
+            return e.type;
+        }
+
         // if it is not in the special map
 
         // with keydown and keyup events the character seems to always
@@ -377,7 +381,7 @@
         // if no action was picked in we should try to pick the one
         // that we think would work best for this key
         if (!action) {
-            action = _getReverseMap()[key] ? 'keydown' : _getReverseMouseMap()[key] ? 'mouseup' : 'keypress';
+            action = _getReverseMap()[key] ? 'keydown' : _getReverseMouseMap()[key] ? 'mouseup' : key == 'wheel' ? 'wheel' : 'keypress';
         }
 
         // modifier keys don't work as expected with keypress,
@@ -924,6 +928,7 @@
         _addEvent(targetElement, 'keydown', _handleKeyEvent);
         _addEvent(targetElement, 'keyup', _handleKeyEvent);
         _addEvent(targetElement, 'mouseup', _handleKeyEvent);
+        _addEvent(targetElement, 'wheel', _handleKeyEvent);
     }
 
     /**
